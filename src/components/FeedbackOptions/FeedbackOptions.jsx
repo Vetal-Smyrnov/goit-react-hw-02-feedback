@@ -1,39 +1,24 @@
-import css from './FeedbackOptions.module.css';
-import clsx from 'clsx';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { ButtonsContainer, OptionsButton } from './FeedbackOptions.styled';
 
-const FeedbackOptions = ({ options, onLeaveFeedback }) => {
-  const firstLetterToUppercase = str => {
-    return str[0].toUpperCase() + str.slice(1);
-  };
-  const feedbackButtonsNameArr = Object.keys(options);
+export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
   return (
-    <>
-      {feedbackButtonsNameArr.map(name => (
-        <button
-          className={clsx(css.button, {
-            [css.good]: name === 'good',
-            [css.neutral]: name === 'neutral',
-            [css.bad]: name === 'bad',
-          })}
-          key={name}
-          onClick={onLeaveFeedback}
-          name={name}
+    <ButtonsContainer>
+      {options.map(option => (
+        <OptionsButton
+          type="button"
+          key={option}
+          onClick={() => onLeaveFeedback(option)}
         >
-          {firstLetterToUppercase(name)}
-        </button>
+          {option}
+        </OptionsButton>
       ))}
-    </>
+    </ButtonsContainer>
   );
 };
 
-export default FeedbackOptions;
-
 FeedbackOptions.propTypes = {
+  options: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   onLeaveFeedback: PropTypes.func.isRequired,
-  options: PropTypes.exact({
-    good: PropTypes.number.isRequired,
-    neutral: PropTypes.number.isRequired,
-    bad: PropTypes.number.isRequired,
-  }),
 };
