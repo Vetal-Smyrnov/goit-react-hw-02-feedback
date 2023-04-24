@@ -1,30 +1,17 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
-import { StatisticItem } from './StatisticItem/StatisticItem';
-import { List } from './Statistics.styled';
-
-export const Statistics = ({
-  good,
-  neutral,
-  bad,
-  total,
-  positivePercentage,
-}) => {
+const Statistics = ({ good, neutral, bad, total, positivePercentage }) => {
   return (
-    <List>
-      <StatisticItem key="Good" label="Good" value={good} />
-      <StatisticItem key="Neutral" label="Neutral" value={neutral} />
-      <StatisticItem key="Bad" label="Bad" value={bad} />
-      <StatisticItem key="Total" label="Total" value={total} />
-      <StatisticItem
-        key="Positive feedback"
-        label="Positive feedback"
-        value={`${positivePercentage}%`}
-      />
-    </List>
+    <>
+      <p>Good: {good}</p>
+      <p>Neutral: {neutral}</p>
+      <p>Bad: {bad}</p>
+      <p>Total: {total}</p>
+      <p>Positive feedback: {positivePercentage}%</p>
+    </>
   );
 };
+export default Statistics;
 
 Statistics.propTypes = {
   good: PropTypes.number.isRequired,
